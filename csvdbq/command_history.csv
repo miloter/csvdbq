@@ -1,0 +1,45 @@
+﻿commands
+select * from paises where pais in ('España', 'alemania', 'reino unido')
+select * from paises where pais in ('España')
+select * from paises3 where pais in ('españa', 'alemania', 'reino unido')
+select * from paises where pais in ('españa', 'alemania', 'reino unido')
+set dir = c:/temp
+set dir = .
+select * from paises
+select * from 'paises repetidos'
+select distinct pais, [poblacion total] from 'paises repetidos'
+select distinct pais as 'Nombre del País', [poblacion total] as Población from 'paises repetidos'
+select distinct pais as 'Nombre del País', [poblacion total] as 'Población' from 'paises repetidos'
+ select pais, poblacion from paises where poblacion < (select avg(poblacion) from paises)
+ select pais, poblacion from paises where poblacion > (select avg(poblacion) from paises)
+ select pais, poblacion from paises where poblacion between 1000000 and 2000000
+select * for groups
+select * from groups
+select clase1, clase2, count(*) as total group by clase1, clase2 from groups
+select clase1, clase2, count(*) as total from groups group by clase1, clase2 from groups
+select clase1, clase2, count(*) as total from groups group by clase1, clase2
+select clase1, clase2, count(*) as total from groups group by clase1, clase2 having total >= 3
+select clase1, clase2, count(*) as total from groups group by clase1, clase2 having 3 >= 3
+select clase1, clase2, count(*) as total from groups group by clase1, clase2 having [total] >= 3
+select clase1, clase2, count(*) as total from groups group by clase1, clase2 having count(*) >= 3
+"select clase1, clase2, count(*) as total
+	 from groups
+	 group by clase1, clase2
+"
+"select clase1, clase2, count(*) as total
+	from groups
+	group by clase1, clase2
+	order by clase1, clase2, total desc"
+"select clase1, clase2, count(*) as total
+	from groups
+	group by clase1, clase2
+	order by clase1, clase2 desc
+"
+"select clase1, clase2, count(*) as total
+	from groups
+	group by clase1, clase2
+	order by clase1, clase2 desc"
+select * from paises order by poblacion desc limit 5
+select * from paises order by poblacion desc limit 5, 5
+select * from paises order by poblacion desc limit 6
+ 
