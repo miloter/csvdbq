@@ -57,7 +57,6 @@ public class Delete {
 			String where = getWhere();								
 	
 			// Final de la query
-			matchIf(Tokens.SEMICOLON);
 			match(Scanner.EOF, "fin del script");	
 			
 			// La salida se manda a un fichero temporal
@@ -163,7 +162,7 @@ public class Delete {
 			}
 			where += scan.lex();
 			token = scan.nextToken();
-		} while (token != Tokens.SEMICOLON && token != Scanner.EOF);		
+		} while (token != Scanner.EOF);		
 		
 		return where;
 	}

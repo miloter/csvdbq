@@ -1,0 +1,6 @@
+﻿id;nombre;apellido1;apellido2;fecha_alta;via;num;mas;cp;localidad;provincia
+1;Miguel;Smith;Russell;[1997-12-29];Avda Aguilera;20;4ª Planta;[03006];Alicante;Alicante
+2;John;Curtis;Travell;[1998-07-19];Calle San Juan Bosco;15;3ª Planta;[03205];Elche;Alicante
+3;Sarah;Park;Michaels;[1994-02-25];Calle Bazán;17;1º;[03504];Benidorm;Alicante
+4;Ruth;Perkins;O'Hara;[1999-01-23];Avda Estación;23;Bajo;[03160];Almoradí;Alicante
+5;Stephen;Reynolds;King;[2000-08-17];Plaza España;1;Bajo;[03690];San Vicente;Alicante

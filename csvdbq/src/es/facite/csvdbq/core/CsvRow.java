@@ -84,7 +84,7 @@ public class CsvRow implements Iterable<Object> {
 		}
 			
 		return sbRow.toString();
-	}
+	}		
 	
 	public String toString(int index) {
 		return toString(row.get(index));

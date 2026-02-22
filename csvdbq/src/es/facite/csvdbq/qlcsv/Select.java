@@ -63,11 +63,20 @@ public class Select {
 			token = scan.nextToken();
 		}
 
-		// FROM table_name
+		// FROM ("JOIN" "(" ... ")" | "UNION" "(" ... ")" | table_name)
 		match(Tokens.FROM, "FROM");
-		var tableName = getTableName();
+		String tableName = null;
+		ResultSelect resultSelect = null;
+		if (token == Tokens.JOIN) {
+			resultSelect = new Join(config).execute(balancedExpression());
+		} else if (token == Tokens.UNION) {
+			resultSelect = new Union(config).execute(balancedExpression());
+		} else {
+			tableName = getTableName();
+		}
 		
-		try (var csvHeaders = new CsvFileHeaders(tableName, config)) {
+		try (var csvHeaders = (tableName != null) ?
+				new CsvFileHeaders(tableName, config) : new CsvHeaders(resultSelect)) {
 			var iterator = csvHeaders.getIterator();
 			
 			// Agregamos las expresiones select si se usó el comodín '*'
@@ -97,7 +106,6 @@ public class Select {
 			var limitExpression = getLimitExpression();
 
 			// Final de la query
-			matchIf(Tokens.SEMICOLON);
 			match(Scanner.EOF, "fin del script");		
 			
 			// Una vez analizada la "SELECT", se extraen las funciones de agregado y se
@@ -688,7 +696,6 @@ public class Select {
 		} while (token != Tokens.GROUP &&
 				token != Tokens.ORDER &&
 				token != Tokens.LIMIT &&
-				token != Tokens.SEMICOLON &&
 				token != Scanner.EOF);		
 		
 		return where;
@@ -705,7 +712,6 @@ public class Select {
 			token = scan.nextToken();
 		} while (token != Tokens.ORDER &&
 				token != Tokens.LIMIT &&
-				token != Tokens.SEMICOLON &&
 				token != Scanner.EOF);		
 		
 		return having;
@@ -720,4 +726,31 @@ public class Select {
 		
 		return tableName;			
 	}
+	
+	private String balancedExpression() {
+		String expression = "";
+		int sumParenth = 0;
+		do {
+			if (expression.length() > 0) {
+				expression += " ";
+			}
+			if (token == Tokens.OPEN_PARENT)
+				sumParenth++;
+			if (token == Tokens.CLOSED_PARENT)
+				sumParenth--;
+
+			expression += scan.lex();
+			token = scan.nextToken();
+		} while (!(sumParenth == 0 &&
+				(
+					token == Tokens.WHERE ||
+					token == Tokens.GROUP ||
+					token == Tokens.HAVING ||
+					token == Tokens.ORDER ||
+					token == Tokens.LIMIT
+				)) && token != Scanner.EOF);
+
+		return expression;
+	}
+
 }

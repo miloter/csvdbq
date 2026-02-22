@@ -42,4 +42,53 @@ select clase1, clase2, count(*) as total from groups group by clase1, clase2 hav
 select * from paises order by poblacion desc limit 5
 select * from paises order by poblacion desc limit 5, 5
 select * from paises order by poblacion desc limit 6
+show tables
+select * from empleados order by fecha_alta desc
+select * from dir_empleados order by cp desc
+create table emp_ord from select * from dir_empleados order by cp desc
+ select * 'paises repetidos'
+ select * from 'paises repetidos'
+ select [poblacion total] from 'paises repetidos'
+ select [Poblacion  total] from 'paises repetidos'
+ select [Poblacion total] from 'paises repetidos'
+"create table emps_dir from join(empleados; dir_empleados; id)"
+"join(empleados; dir_empleados; id)"
+"select * from join(empleados; join(empleados; dir_empleados; id)); id)"
+"select * from join(empleados; join(empleados; dir_empleados; id); id)"
+"select id, nombre, apellido1, via, num, cp from join(empleados; dir_empleados; id)"
+"select id, nombre, apellido1, via, num, cp
+ from join(empleados; dir_empleados; id)
+	order by cp desc"
+select * from paises 1
+union(paises1, paises2)
+join(paises1, paises2)
+"join(paises1; paises2 pais)"
+"join(paises1; paises2)"
+"join(paises1; paises2; pais)"
+"union(paises1; paises2; pais)"
+"union(paises1; paises2)"
+"create table paises3 from
+	select * from union(paises1; paises2) limit 0"
+"create table paises3 from
+	select * from union(paises1; paises2)"
+show headers paises3
+show headers from paises3
+show headers from 'paises3'
+drop table paises3
+"create table paises3 from
+	select * paises1 limit 0"
+"create table paises3 from
+	select * from paises1 limit 0"
+select * from paises3
+select * empleados
+select * from empleados
+select * from dir_empleados
+"select * from join(empleados; dir_empleados; id)"
+"select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
+	from join(empleados; dir_empleados; id)"
+select * from union(paises1, paises2)
+select * from paises1
+select * from paises2
+"select * from union(paises1; paises2)"
+"select * from union(paises1; paises2) order by poblacion desc"
  

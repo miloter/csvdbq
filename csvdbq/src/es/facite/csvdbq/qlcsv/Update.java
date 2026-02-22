@@ -64,7 +64,7 @@ public class Update {
 			String where = null;
 			if (matchIf(Tokens.WHERE)) {
 				where = "";
-				while (token != Tokens.SEMICOLON && token != Scanner.EOF) {
+				while (token != Scanner.EOF) {
 					if (where.length() != 0) {
 						where += " ";
 					}
@@ -74,7 +74,6 @@ public class Update {
 			}
 	
 			// Final de la query
-			matchIf(Tokens.SEMICOLON);
 			match(Scanner.EOF, "fin del script");
 		
 			// La salida se manda a un fichero temporal

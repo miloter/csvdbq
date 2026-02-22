@@ -124,8 +124,6 @@ public class Insert {
 			} catch (IOException e) {	
 				throw new CsvDbQException(e);
 			}
-		
-			matchIf(Tokens.SEMICOLON);
 			match(Scanner.EOF, "fin del script");
 			
 			return rowsInserted;		

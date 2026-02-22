@@ -80,6 +80,16 @@ public class CommandExecutor {
 			var rowsDeleted = new Delete(config).execute(command);
 			result = rowsDeleted + " filas eliminadas.";
 			break;
+		case Tokens.JOIN:
+			resultSelect = new Join(config).execute(command);
+			result = resultSelect.toString();
+			result += System.lineSeparator() + resultSelect.size() + " filas devueltas.";
+			break;
+		case Tokens.UNION:
+			resultSelect = new Union(config).execute(command);
+			result = resultSelect.toString();
+			result += System.lineSeparator() + resultSelect.size() + " filas devueltas.";
+			break;
 		case Tokens.SHOW:
 			token = scan.nextToken();
 			temp = scan.lex().toLowerCase();
@@ -109,6 +119,7 @@ public class CommandExecutor {
 				result = config.isDecimalSeparatorPoint() ? "." : ",";
 			} else if (temp.equals("headers")) {
 				token = scan.nextToken();
+				match(Tokens.FROM, "FROM");
 				temp = getIdentOrString();
 				match(Scanner.EOF, "fin del comando");
 				result = "";
@@ -229,10 +240,10 @@ public class CommandExecutor {
 					match(Tokens.CLOSED_PARENT, ")");
 					match(Scanner.EOF, "fin del comando");
 				} else {
-					// "FROM" "SELECT" ...
-					match(Tokens.FROM, "FROM");
+					// "FROM" "SELECT" ... 
+					match(Tokens.FROM, "FROM");				 
 					temp = getExpression();													
-					resultSelect = new Select(config).execute(temp);
+					resultSelect = new Select(config).execute(temp);					
 					headers = resultSelect.getHeaders();
 					rows = resultSelect.getRows();
 				}				

@@ -1,9 +1,9 @@
 package es.facite.csvdbq.test;
 
 import es.facite.csvdbq.qlcsv.CsvConfig;
-import es.facite.csvdbq.qlcsv.Select;
+import es.facite.csvdbq.qlcsv.Join;
 
-public class C04Select {
+public class C09Join {
 	static final String DB_DIR = "./";
 	static final char QUOTES = '"';
 	static final char SEP = ';';
@@ -13,12 +13,11 @@ public class C04Select {
 		long tStart = System.currentTimeMillis();
 		
 		var dbManager = new CsvConfig(DB_DIR, QUOTES, SEP, DECIMAL_SEPARATOR_POINT);
-		var select = new Select(dbManager);
-		var rows = select.execute("select id, nombre, apellido1, via, num "
-				+ "from join(empleados; dir_empleados; id) "
-				+ "where id % 2 != 0 order by num asc");
-		System.out.println(rows);
+		var join = new Join(dbManager);
+		var rows = join.execute("join(select * from dir_empleados; "
+				+ "select * from dir_empleados; id)");
 		
+		System.out.println(rows);		
 		System.out.println(rows.size() + " filas devueltas en " + (System.currentTimeMillis() - tStart) + " ms.");
 	}
 }

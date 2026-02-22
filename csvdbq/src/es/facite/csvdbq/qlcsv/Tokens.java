@@ -69,6 +69,8 @@ class Tokens {
 	static final int DECRYPT = 77;
 	static final int TYPEOF = 78;
 	static final int IN = 79;
+	static final int JOIN = 80;
+	static final int UNION = 81;
 	
 	static void initialize(Scanner scan) {		
 		scan.setOperatorString("'");
@@ -152,5 +154,7 @@ class Tokens {
 		scan.keywordAdd(DECRYPT, "DECRYPT");
 		scan.keywordAdd(TYPEOF, "TYPEOF");
 		scan.keywordAdd(IN, "IN");
+		scan.keywordAdd(JOIN, "JOIN");
+		scan.keywordAdd(UNION, "UNION");
 	}	
 }
