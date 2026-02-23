@@ -42,7 +42,6 @@ select clase1, clase2, count(*) as total from groups group by clase1, clase2 hav
 select * from paises order by poblacion desc limit 5
 select * from paises order by poblacion desc limit 5, 5
 select * from paises order by poblacion desc limit 6
-show tables
 select * from empleados order by fecha_alta desc
 select * from dir_empleados order by cp desc
 create table emp_ord from select * from dir_empleados order by cp desc
@@ -81,9 +80,6 @@ drop table paises3
 	select * from paises1 limit 0"
 select * from paises3
 select * empleados
-select * from empleados
-select * from dir_empleados
-"select * from join(empleados; dir_empleados; id)"
 "select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
 	from join(empleados; dir_empleados; id)"
 select * from union(paises1, paises2)
@@ -91,4 +87,22 @@ select * from paises1
 select * from paises2
 "select * from union(paises1; paises2)"
 "select * from union(paises1; paises2) order by poblacion desc"
+encrypt table
+encrypt table empleados
+encrypt table dir_empleados
+"selelect * from join(empleados; dir_empleados; id)"
+"create table full_empleados from select * from join(empleados; dir_empleados; id)"
+decrypt table empleados, dir_empleados, full_empleados
+set cipher
+select * from full_empleados
+"select * from join(empleados; dir_empleados; id)"
+select * from dir_empleados
+"select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
+	from join(empleados; dir_empleados; id)"
+show tables
+insert into empleados(id, nombre) values(6, 'Elena')
+delete from empleados where id = 6
+select * from empleados
+create table empleados2 from select * from empleados
+select * from empleados2
  
