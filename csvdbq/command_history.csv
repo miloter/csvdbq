@@ -96,13 +96,16 @@ decrypt table empleados, dir_empleados, full_empleados
 set cipher
 select * from full_empleados
 "select * from join(empleados; dir_empleados; id)"
-select * from dir_empleados
 "select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
 	from join(empleados; dir_empleados; id)"
 show tables
 insert into empleados(id, nombre) values(6, 'Elena')
 delete from empleados where id = 6
 select * from empleados
+select * from dir_empleados
+"select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
+      from join(empleados; dir_empleados; id)"
+drop table empleados2
 create table empleados2 from select * from empleados
 select * from empleados2
  
