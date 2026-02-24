@@ -11,7 +11,9 @@
 * QlCsv admite archivos CSV que usen como entrecomillado la comilla doble (“), o la simple (‘) y como separador de campos uno de: punto y coma (;), coma (,) o tabulador (   ).
 * Los ficheros CSV se guardan con la marca de BOM UTF-8 para compatibilidad con Excel.
 
-Para lanzar la aplicación se necesita tener instalado Java 21 o superior, y se puede lanzar desde el directorio raiz del proyecto ejecutando:
+Puede probar la aplicación en Windows descargando [CsvDbQ para Windows](CsvDbQ-0.1.2_win_x64.zip) que incluye un jre-21 integrado y el ejecutable de la aplicación (generado con launch4j y Java jdeps/jlink)
+
+Para lanzar la aplicación desde los *.class se necesita tener instalado Java 21 o superior, y se puede lanzar desde el directorio raiz del proyecto ejecutando:
 ```
 javaw -cp "./bin;./lib/text-scanner-1.0.3.jar" es.facite.csvdbq.gui.view.App
 ```
