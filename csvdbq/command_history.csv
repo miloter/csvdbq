@@ -107,5 +107,48 @@ select * from dir_empleados
       from join(empleados; dir_empleados; id)"
 drop table empleados2
 create table empleados2 from select * from empleados
+insert into empleados2(id, nombre) values(6, 'Elena')
+insert into empleados2() values()
+"insert into empleados2(nombre, apellido1, apellido2, fecha_alta, id)
+ values
+	('Sam', 'Muller', 'Thomson', '[2001-04-20]', 7)
+	('Mya', 'Stacy', 'Kent', '[2003-10-02]', 8)"
+delete from empleados2 where id >= 7
+"insert into empleados2(nombre, apellido1, apellido2, fecha_alta, id)
+ values
+	('Sam', 'Muller', 'Thomson', '[2001-04-20]', 7)
+,
+	('Mya', 'Stacy', 'Kent', '[2003-10-02]', 8)"
+"insert into empleados2(nombre, apellido1, apellido2, fecha_alta, id, id2)
+ values
+	('Sam', 'Muller', 'Thomson', '[2001-04-20]', 9, 11)
+"
+"insert into empleados2(nombre, apellido1, apellido2, fecha_alta, id, nombre)
+ values
+	('Sam', 'Muller', 'Thomson', '[2001-04-20]', 9, 'Sean')
+"
+delete from empleados2 where id = 9
+select count(*) from command_history
+"update empleados
+ set
+		apellido1 = 'Lorem',
+		apellido2 = 'Ipsum',
+		fecha_alta = '[1996-03-31]'
+	where id = 6"
+"update empleados
+2 set
+		apellido1 = 'Lorem',
+		apellido2 = 'Ipsum',
+		fecha_alta = '[1996-03-31]'
+	where id = 6"
+"update empleados2 set
+		apellido1 = 'Lorem',
+		apellido2 = 'Ipsum',
+		fecha_alta = '[1996-03-31]'
+	where id = 6"
+select * from empleados2 where id = 6
+select * from empleados2 where fecha_alta >= '[2000-'
+delete * from empleados2 where fecha_alta >= '[2000-'
+delete from empleados2 where fecha_alta >= '[2000-'
 select * from empleados2
  

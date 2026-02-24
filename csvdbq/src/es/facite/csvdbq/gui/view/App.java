@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +57,17 @@ public class App extends JFrame {
 
 	public App() {
 		commands = new ArrayList<>();
+		commandExecutor = new CommandExecutor();
+		// Si no existe el historial de comandos lo crea
+		final File fileCommandHisory = new File(USER_DIR,
+				TABLE_NAME_COMMAND_HISTORY + CsvConfig.TABLE_SUFFIX); 
+		if (!fileCommandHisory.exists()) {
+			commandExecutor.execute("create table " + TABLE_NAME_COMMAND_HISTORY +
+					"(commands)", CONFIG_COMMAND_HISTORY);
+		}
 		// Cargamos el historial de comandos
 		onClearCommandHistory(new Select(CONFIG_COMMAND_HISTORY)
 				.execute("SELECT commands FROM " + TABLE_NAME_COMMAND_HISTORY).getRows());
-		commandExecutor = new CommandExecutor();
 
 		setTitle(AppInfo.NAME + " - " + AppInfo.VERSION);
 		setIconImage(Resource.imageOfResource("app.gif"));
