@@ -162,7 +162,7 @@ public class Join {
 		token = scan.nextToken();
 		return tableName;
 	}
-
+		
 	private String balancedExpression() {
 		String expression = "";
 		int sumParenth = 0;
@@ -177,7 +177,10 @@ public class Join {
 
 			expression += scan.lex();
 			token = scan.nextToken();
-		} while (!(sumParenth == 0 && token == Tokens.SEMICOLON) && token != Scanner.EOF);
+		} while (
+				!(sumParenth == 0 &&
+					(token == Tokens.SEMICOLON || token == Tokens.CLOSED_PARENT)) &&
+				token != Scanner.EOF);
 
 		return expression;
 	}

@@ -747,7 +747,8 @@ public class Select {
 					token == Tokens.GROUP ||
 					token == Tokens.HAVING ||
 					token == Tokens.ORDER ||
-					token == Tokens.LIMIT
+					token == Tokens.LIMIT ||
+					token == Tokens.CLOSED_PARENT
 				)) && token != Scanner.EOF);
 
 		return expression;

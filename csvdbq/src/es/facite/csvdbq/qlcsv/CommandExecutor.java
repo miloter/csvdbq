@@ -1,5 +1,6 @@
 package es.facite.csvdbq.qlcsv;
 
+import java.awt.Component;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -18,7 +19,7 @@ import es.facite.csvdbq.core.TokensCsv;
 import es.facite.csvdbq.exception.CsvDbQException;
 import es.facite.csvdbq.exception.CsvDbQSintaxException;
 import es.facite.csvdbq.iterator.CsvFileHeaders;
-import es.facite.csvdbq.security.Crypto;
+import es.facite.csvdbq.security.PasswordDialog;
 import es.facite.text.Scanner;
 import es.facite.text.TextScanner;
 
@@ -28,6 +29,7 @@ import es.facite.text.TextScanner;
 public class CommandExecutor {
 	private TextScanner scan;
 	private int token;
+	private Component parentComponent;
 	
 	private class ExtendFilenameFilter implements FilenameFilter {
 		private String filePattern;
@@ -41,8 +43,13 @@ public class CommandExecutor {
 			return filePattern.isEmpty() || Pattern.matches(filePattern, name);
 		}
 	}
-
+	
 	public CommandExecutor() {
+		this(null);
+	}
+
+	public CommandExecutor(Component parentComponent) {
+		this.parentComponent = parentComponent;
 		scan = new TextScanner("", true);
 		Tokens.initialize(scan);
 	}
@@ -208,7 +215,7 @@ public class CommandExecutor {
 			} else if (temp.equals("cipher")) {
 				token = scan.nextToken();
 				match(Scanner.EOF, "fin del comando");
-				result = Crypto.showPasswordDialog("Solicitud de contraseña", "", false);
+				result = PasswordDialog.showPasswordDialog(parentComponent);
 				if (result != null) {
 					config.getCipher().setPassword(result);						
 					if (result.isEmpty()) {
@@ -263,7 +270,7 @@ public class CommandExecutor {
 					
 					result = "Tabla " + tableName + "(" + String.join(", ",
 							headers.values().stream().map(o -> "'" + o + "'").toList()) +
-							") creada con exito.";
+							") creada con éxito.";
 				} catch (IOException e) {
 					throw new CsvDbQException(e);
 				}										
@@ -285,7 +292,7 @@ public class CommandExecutor {
 				} else {
 					try {
 						Files.delete(pathCsv);
-						result = "Fichero '" + pathCsv + "' eliminado con exito."; 
+						result = "Fichero '" + pathCsv + "' eliminado con éxito."; 
 					} catch (IOException e) {
 						throw new CsvDbQException(e);
 					}

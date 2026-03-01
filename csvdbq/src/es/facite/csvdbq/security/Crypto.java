@@ -1,15 +1,8 @@
 package es.facite.csvdbq.security;
 
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.WindowConstants;
 
 public class Crypto {
 	/**
@@ -171,57 +164,7 @@ public class Crypto {
 
 		return sb.toString();
 	}
-
-	/**
-	 * Muestra un cuadro de diálogo de solicitud de contraseña
-	 * 
-	 * @param title Título del cuandro de diálogo.
-	 * @param text  Texto inicial que aparecerá como contraseña.
-	 * @return La contraseña en claro o null si se canceló.
-	 */
-	public static String showPasswordDialog(String title, String text, boolean alwaysOnTop) {
-		final JPasswordField pf = new JPasswordField();
-		pf.setText(text);
-		// Create OptionPane & Dialog
-		JOptionPane pane = new JOptionPane(pf, JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
-		JDialog dialog = pane.createDialog(title);
-
-		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-		// Add a listener to the dialog to request focus of Password Field
-		dialog.addComponentListener(new ComponentListener() {
-			@Override
-			public void componentShown(ComponentEvent e) {
-				pf.requestFocusInWindow();
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				dialog.dispose();
-			}
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-			}
-		});
-
-		if (alwaysOnTop) {
-			dialog.setAlwaysOnTop(true);
-		}
-
-		dialog.setVisible(true);
-
-		if (pane.getValue() == null || (int) pane.getValue() == JOptionPane.CANCEL_OPTION || (int) pane.getValue() == JOptionPane.CLOSED_OPTION) {
-			return null;
-		} else {
-			return new String(pf.getPassword());
-		}
-	}
-	
+			
 	/**
 	 * Devuelve un número entero aleatorio entre dos valores.
 	 *

@@ -5,7 +5,6 @@ select * from paises3 where pais in ('españa', 'alemania', 'reino unido')
 select * from paises where pais in ('españa', 'alemania', 'reino unido')
 set dir = c:/temp
 set dir = .
-select * from paises
 select * from 'paises repetidos'
 select distinct pais, [poblacion total] from 'paises repetidos'
 select distinct pais as 'Nombre del País', [poblacion total] as Población from 'paises repetidos'
@@ -51,7 +50,6 @@ create table emp_ord from select * from dir_empleados order by cp desc
  select [Poblacion  total] from 'paises repetidos'
  select [Poblacion total] from 'paises repetidos'
 "create table emps_dir from join(empleados; dir_empleados; id)"
-"join(empleados; dir_empleados; id)"
 "select * from join(empleados; join(empleados; dir_empleados; id)); id)"
 "select * from join(empleados; join(empleados; dir_empleados; id); id)"
 "select id, nombre, apellido1, via, num, cp from join(empleados; dir_empleados; id)"
@@ -65,7 +63,6 @@ join(paises1, paises2)
 "join(paises1; paises2)"
 "join(paises1; paises2; pais)"
 "union(paises1; paises2; pais)"
-"union(paises1; paises2)"
 "create table paises3 from
 	select * from union(paises1; paises2) limit 0"
 "create table paises3 from
@@ -83,8 +80,6 @@ select * empleados
 "select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
 	from join(empleados; dir_empleados; id)"
 select * from union(paises1, paises2)
-select * from paises1
-select * from paises2
 "select * from union(paises1; paises2)"
 "select * from union(paises1; paises2) order by poblacion desc"
 encrypt table
@@ -93,15 +88,12 @@ encrypt table dir_empleados
 "selelect * from join(empleados; dir_empleados; id)"
 "create table full_empleados from select * from join(empleados; dir_empleados; id)"
 decrypt table empleados, dir_empleados, full_empleados
-set cipher
 select * from full_empleados
 "select * from join(empleados; dir_empleados; id)"
 "select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
 	from join(empleados; dir_empleados; id)"
-show tables
 insert into empleados(id, nombre) values(6, 'Elena')
 delete from empleados where id = 6
-select * from empleados
 select * from dir_empleados
 "select id, nombre, apellido1, apellido2, via, num, mas, cp, localidad
       from join(empleados; dir_empleados; id)"
@@ -151,4 +143,56 @@ select * from empleados2 where fecha_alta >= '[2000-'
 delete * from empleados2 where fecha_alta >= '[2000-'
 delete from empleados2 where fecha_alta >= '[2000-'
 select * from empleados2
+create table emp_cipher from select * from empleados
+encrypt table emp_cipher
+select * from emp_cipher
+select id, nombre, fecha_alta where fecha_alta < '[1999'
+select id, nombre, fecha_alta from emp_cipher where fecha_alta < '[1999'
+decrypt tabla emp_cipher
+decrypt table emp_cipher
+select * from empleados
+"join(empleados; emps_dir; id)"
+select * from emps_dir
+create table emps_dir2 from select id, via, num, mas, cp, localidad, provincia
+"join(empleados; dir_empleados; id)"
+"join(select id, nombre, apellido1 from empleados; select id, via, num, cp from dir_empleados; id)"
+"join(
+	select id, nombre, apellido1 from empleados;
+	select id, via, num, cp from dir_empleados; id)"
+set chipher
+xxxxkkkkkkk
+"join(
+	select id, nombre, apellido1 from empleados;
+	select id, via, num, cp from dir_empleados;
+	id
+)"
+set cipher
+show tables
+select * from paises2
+"union(paises1; paises2)"
+"union(
+	select pais, poblacion from paises1 where poblacion < 10000000;
+	select pais, poblacion from paises2 where poblacion < 10000000
+)"
+"union(
+	select pais, poblacion from paises1 where poblacion < 10000000;
+	select pais, poblacion from paises2 where poblacion < 10000000
+)"
+"union(
+	select pais, poblacion from paises1 where poblacion < 10000000;
+	select pais, poblacion from paises2 where poblacion < 10000000
+
+)"
+"union(
+select pais, poblacion from paises1 where poblacion < 10000000;
+ select pais, poblacion from paises2 where poblacion < 10000000
+)"
+"union(
+	
+select pais, poblacion from paises1 where poblacion < 10000000;
+	select pais, poblacion from paises2 where poblacion < 10000000
+
+)"
+select * from paises1
+select * from paises
  

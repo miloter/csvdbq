@@ -57,7 +57,7 @@ public class App extends JFrame {
 
 	public App() {
 		commands = new ArrayList<>();
-		commandExecutor = new CommandExecutor();
+		commandExecutor = new CommandExecutor(this);
 		// Si no existe el historial de comandos lo crea
 		final File fileCommandHisory = new File(USER_DIR,
 				TABLE_NAME_COMMAND_HISTORY + CsvConfig.TABLE_SUFFIX); 
